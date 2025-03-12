@@ -1,19 +1,29 @@
 	<!DOCTYPE html>
+	<!--
+	APMCalculator source code
+	Code written by Sean-Paul Divincenzo
+	MoGO Dice font created by Sean-Paul Divincenzo
+	APM Calculator Logo designed by Sean-Paul Divincenzo
+	MONOPOLY, Monopoly GO!, and all related assets, including but not limited to name, logos, distinctive design, and intellectual property, are owned
+	by solely by Hasbro and Scopely. APM Calculator and Sean-Paul Divincenzo claims no ownership over MONOPOLY, Monopoly GO!, or any of its assets.
+	-->
 	<html lang="en">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- Font Awesome uses my personal kit here, please go to fontawesome.com and make your own to replace this kit to prevent any issues -->
 		<script src="https://kit.fontawesome.com/2da270ed34.js" crossorigin="anonymous"></script>
-		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3875112519675768" crossorigin="anonymous"></script>
 		<title>APM Calculator</title>
-		<style>
+		<style> 
+		  /* This is the dice font made by me */
 			@font-face {
 				font-family: 'MoGO Dice';
 				src: url('fonts/mogo-dice.ttf') format('truetype');
 				font-weight: normal;
-				font-style: normal;
+				font-style: normal;S
 			}
 			@font-face {
+			  /* Kabel font used by Monopoly GO! */
 				font-family: 'Kabel Bold';
 				src: url('fonts/Kabel-Bold-Normal.ttf') format('truetype');
 				font-weight: normal;
@@ -440,6 +450,7 @@
 				</div>
 			</div>
 			<div class="section">
+			  <!-- The div sections here are meant to be blank with the exception of the NEXT and ROLL divs -->
 				<h2>Board Tracking</h2>
 				<div id="game-board">
 					<div></div>
@@ -568,37 +579,42 @@
 				<p style="font-size:12px">Check out our discord for news, updates, and more!</p>
 				<button><a style="text-decoration:none;color:white;" href="https://discord.com/invite/jPdmaFSAC2"><i class="fa-brands fa-discord"></i> Join the Discord</a></button>
 				<button><a style="text-decoration:none;color:white;" href="pegtrack.html">Peg-E Tracker</a></button>
-				<button><a style="text-decoration:none;color:white;" href="partnertrack.html">NEW! Partner Wheel Tracker</a></button>
+				<button><a style="text-decoration:none;color:white;" href="https://github.com/seandivincenzo/APM-Calcuator">Source Code</a></button>
 			</div>
 		</div>
 		<script>
+		  // Redirect function for mobile devices
 			function redirectToMobilePage() {
+			  // Test if device used is mobile device
 				var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 				if (isMobile) {
-					// Redirect to the mobile page
+					// If device is a mobile device redirect to mobile version
 					window.location.href = 'mobile.html';
 				}
 			}
 
-			// Call the function on page load
+			// Call the redirect function on page load
 			redirectToMobilePage();
 			
+			// Retrieve the numbers from the input elements
 			const num1 = document.getElementById('num1');
 			const num2 = document.getElementById('num2');
 
-			// Populate input fields when user types anywhere
+			// Force focus to input fields when user presses enter
 			document.addEventListener('keydown', (event) => {
 				if (event.key === 'Enter') {
 					num1.focus();
 				}
 			});
 
+			// Force focus to second input field when first input field reaches max length (1 character)
 			num1.addEventListener('input', () => {
 				if (num1.value.length === num1.maxLength) {
 					num2.focus();
 				}
 			});
-
+			
+			// Run the addNumbers function when the second input field reaches max length (1 character)
 			num2.addEventListener('input', () => {
 				if (num2.value.length === num2.maxLength) {
 					addNumbers();
@@ -606,44 +622,66 @@
 			});
 
 			function addNumbers() {
+			  // parse integer from num1 and num2 value
 				const num1Value = parseInt(num1.value);
 				const num2Value = parseInt(num2.value);
+				// Make sure the numbers are within a range of 1 to 6
 				if (num1Value >= 1 && num1Value <= 6 && num2Value >= 1 && num2Value <= 6) {
+				  // Get the sum of both nums
 					const sum = num1Value + num2Value;
+					// Get the roll list
 					const list = document.getElementById('list');
+					// Create a new list item for the rol list
 					const listItem = document.createElement('li');
+					// Create a new edit button for the new list item
 					const editButton = document.createElement('button');
+					// Create a new delete button for the new list item
 					const deleteButton = document.createElement('button');
+					// Create a new container for the new buttons
 					const buttonContainer = document.createElement('div');
+					// Give the new button container the button-container class name
 					buttonContainer.className = 'button-container';
+					// Give the new edit button the edit-button class and add text to the inner html
 					editButton.className = 'edit-button';
 					editButton.innerHTML = 'EDIT';
+					// Make the edit button run the editItem function when clicked
 					editButton.onclick = function(event) {
 						editItem(event.target);
 					};
+					// Give the new delete button the delete-button class and add text to the inner html
 					deleteButton.className = 'delete-button';
 					deleteButton.innerHTML = 'DELETE';
+					// Make the edit button run the deleteItem function when clicked
 					deleteButton.onclick = function(event) {
 						deleteItem(event.target);
 					};
+					// Add the new buttons to the new button container
 					buttonContainer.appendChild(deleteButton);
 					buttonContainer.appendChild(editButton);
+					// Add the sum to the new list item
 					listItem.textContent = sum;
+					// Add the button container to the new list item
 					listItem.appendChild(buttonContainer);
+					// Add the new list item to the roll list
 					list.appendChild(listItem);
+					// Set the placeholder text for the input fields to the previous inputs
 					let placeholderValue1 = num1.value;
 					let placeholderValue2 = num2.value;
 					num1.value = '';
 					num2.value = '';
 					num1.placeholder = placeholderValue1;
 					num2.placeholder = placeholderValue2;
+					// Reset the focus to the first input field
 					num1.focus();
+					// Update the board tracker
 					updateBoard();
 				} else {
+				  // If numbers aren't between 1 and 6 throw an alert
 					alert('Both numbers must be within the range of 1 to 6.');
 				}
 			}
-
+      
+      // Remove the first item in the list
 			function removeFirstItem() {
 				const list = document.getElementById('list');
 				if (list.firstChild) {
@@ -652,6 +690,7 @@
 				}
 			}
 			
+			// Clear the whole list
 			function clearList() {
 				const list = document.getElementById('list');
 				while (list.firstChild) {
@@ -660,11 +699,13 @@
 				updateBoard();
 			}
 			
+			// Delete the parent list item
 			function deleteItem(button) {
 				const listItem = button.closest('li');
 				listItem.remove();
 			};
 
+      // Edit the parent list item's text
 			function editItem(button) {
 				const listItem = button.closest('li');
 				const input = document.createElement('input');
@@ -705,48 +746,80 @@
 				});
 			};
 			
-			// Game board functionality
+			// Game board functionality, this is crazy right here so buckle in.
+			// Some explanation as to what is going on here, the game board is handled by creating an 11x11 grid in the css
+			// The grid is then edited with the following code to correctly display all the spaces
+			// Get the game board section
 			const gameBoard = document.getElementById('game-board');
+			// Create an array from every child element from the game board section
 			const cells = Array.from(gameBoard.children);
+			// Create a list of all the grid slots that need to be edited going from the bottom right space then going clockwise around the entire board
 			const spaces = [gameBoard.children[121], gameBoard.children[120], gameBoard.children[119], gameBoard.children[118], gameBoard.children[117], gameBoard.children[116], gameBoard.children[115], gameBoard.children[114], gameBoard.children[113], gameBoard.children[112], gameBoard.children[111], gameBoard.children[110], gameBoard.children[99], gameBoard.children[88], gameBoard.children[77], gameBoard.children[66], gameBoard.children[55], gameBoard.children[44], gameBoard.children[33], gameBoard.children[22], gameBoard.children[11], gameBoard.children[0], gameBoard.children[1], gameBoard.children[2], gameBoard.children[3], gameBoard.children[4], gameBoard.children[5], gameBoard.children[6], gameBoard.children[7], gameBoard.children[8], gameBoard.children[9], gameBoard.children[10], gameBoard.children[21], gameBoard.children[32], gameBoard.children[43], gameBoard.children[54], gameBoard.children[65], gameBoard.children[76], gameBoard.children[87], gameBoard.children[98], gameBoard.children[109]];
+			// Create a list of all the location icons in the order the must be displayed
+			// House = Property, Box = Community Chest, Percent = Tax, Train = Railroad, Question Mark = Chance, Lightbulb/Droplet = Utilities
+			// Arrow = GO!, Eye = Just Visiting, Car = Free Parking, Handcuffs = Go to Jail
 			const locations = ['<i class="fa-solid fa-left-long"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-box-open"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-percent"></i>', '<i class="fa-solid fa-train"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-question"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-eye"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-lightbulb"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-train"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-box-open"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-car"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-question"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-train"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-droplet"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-handcuffs"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-box-open"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-train"></i>', '<i class="fa-solid fa-question"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-percent"></i>', '<i class="fa-solid fa-house"></i>'];
+			// Create a list off all the color classes that need to be added to each space, if the space is not colored it will be set to 'none'
+			// This is just for improved visuals and is not necessary
 			const localeClasses = ['none', 'none', 'brown', 'none', 'brown', 'none', 'none', 'cyan', 'none', 'cyan', 'cyan', 'none', 'pink', 'none', 'pink', 'pink', 'none', 'orange', 'none', 'orange', 'orange', 'none', 'red', 'none', 'red', 'red', 'none', 'yellow', 'yellow', 'none', 'yellow', 'none', 'green', 'green', 'none', 'green', 'none', 'none', 'blue', 'none', 'blue']
+			// Set space to 1
 			let space = 1;
+			// Set tokenSpace (Where the token is located) to 0
 			let tokenSpace = 0;
 			
+			// Run this function for each space
 			spaces.forEach((cell, indexSpace) => {
+			  // Check to make sure this space exists
 				if (cell) {
+				  // Set the innerHTML of the selected space with the correct icon
 					cell.innerHTML = locations[indexSpace-1];
+					// Update the visuals of the space with the selectable-space class
 					cell.classList.add('selectable-space')
+					// Set the color of the space according to the localeClasses list
 					cell.classList.add(localeClasses[indexSpace]);
+					// Add a click event listener to the space to make it selectable
 					cell.addEventListener('click', () => {
+					  // Check if any cell that is not this cell is set to selected
 						if (!cell.classList.contains('selected')) {
+						  // Remove the 'select' class from all cells
 							cells.forEach(cell => cell.classList.remove('selected'));
+						  // Remove the 'next-space' class from all cells
 							cells.forEach(cell => cell.classList.remove('next-space'));
+						  // Remove the 'following-space' class from all cells
 							cells.forEach(cell => cell.classList.remove('following-space'));
+							// Add 'selected' class to current cell
 							cell.classList.add('selected');
+							// Set current cell id to 'selected'
 							cell.id = 'selected';
+							// Set the tokenSpace to the indexSpace of the current cell
 							tokenSpace = indexSpace;
 		
-							// Display the 'next space' in the center of the board
-							const centerCell = gameBoard.children[60]; // 5th row, 5th column
+							// Display the icon of the cell with the class 'next-space' in the center of the board
+							const centerCell = gameBoard.children[60];
+							// Get the roll list
 							const list = document.getElementById('list');
+							// Check if the list has a child item
 							if (list.firstChild) {
+							  // Get the value of the first child
 								const firstChildValue = parseInt(document.getElementById('list').firstChild.textContent);
+								// Get the selected space
 								const selectedSpace = parseInt(indexSpace);
+								// Get the next space
 								const nextSpaceIndex = (selectedSpace + firstChildValue) % 100;
 								const adjustedSpaceIndex = ((selectedSpace-40) + firstChildValue) % 100;
+								// Set next-space class if next space index is 40 or lower
 								if (nextSpaceIndex <= 40){
 									const nextSpace = spaces[nextSpaceIndex];
 									const locationIndex = (nextSpaceIndex-1);
 									nextSpace.classList.add('next-space');
 									centerCell.innerHTML = locations[locationIndex];
-								} else {
+								} else { // Wrap around the board using the adjusted space index if the next space index is over 40
 									const nextSpace = spaces[adjustedSpaceIndex];
 									const locationIndex = (adjustedSpaceIndex-1);
 									nextSpace.classList.add('next-space');
 									centerCell.innerHTML = locations[locationIndex];
 								}
+								// Lots of stuff here to get the second roll in the roll list and edit the spaces accordingly
 								if (list.firstElementChild.nextElementSibling) {
 									const secondChildValue = parseInt(document.getElementById('list').firstElementChild.nextElementSibling.textContent);
 									const proceedingSpaceIndex = (nextSpaceIndex + secondChildValue) % 100;
@@ -766,6 +839,7 @@
 				}
 			});
 			
+			// This does a lot of stuff the was set previously again to update the board whenever the list is changed or a new space is selected.
 			function updateBoard() {
 				cells.forEach(cell => cell.classList.remove('next-space'));
 				cells.forEach(cell => cell.classList.remove('following-space'));
@@ -806,6 +880,7 @@
 					}
 			}
 		</script>
+		<!-- This is a button that lets you give me money (please donate, making websites is hard) -->
 		<script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
 		<script>
 			kofiWidgetOverlay.draw('greytsaki', {
