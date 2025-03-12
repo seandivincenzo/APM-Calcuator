@@ -1,3 +1,5 @@
+<image src="https://github.com/seandivincenzo/APM-Calcuator/blob/main/images/logo.png" style="width:50%"></image>
+
 # APM-Calcuator
 This is the source code to my Monopoly GO! APM Calcuator.
 
