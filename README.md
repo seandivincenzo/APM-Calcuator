@@ -25,7 +25,10 @@ APM or Airplane Mode, is an exploit for the mobile game Monopoly GO! that allows
 I no longer had the time or money to continue the development of the calculator and keep the domain running. I am releasing the source code to "pass the torch" so to speak.
 
 ## If I use your code do I need to credit you?
-Yes, if you use my code you **must** credit me and link to this github, even if you change the code. If you do take over the project I also request you join the existing [APM Calculator Discord server](https://discord.com/invite/jPdmaFSAC2) as the new developer, 
+Yes, if you use my code you **must** credit me and link to this github, even if you change the code. If you do take over the project I also request you join the existing [APM Calculator Discord server](https://discord.com/invite/jPdmaFSAC2) as the new developer.
+
+## Can I donate?
+Absolutely! You can support me and future projects by donating to my [Ko-Fi](https://ko-fi.com/greytsaki)
 
 # Credits
 
