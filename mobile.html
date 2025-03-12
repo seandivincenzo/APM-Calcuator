@@ -1,0 +1,539 @@
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<script src="https://kit.fontawesome.com/2da270ed34.js" crossorigin="anonymous"></script>
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3875112519675768" crossorigin="anonymous"></script>
+		<title>APM Calculator</title>
+		<style>
+			@font-face {
+				font-family: 'MoGO Dice';
+				src: url('fonts/mogo-dice.ttf') format('truetype');
+				font-weight: normal;
+				font-style: normal;
+			}
+			@font-face {
+				font-family: 'Kabel Bold';
+				src: url('fonts/Kabel-Bold-Normal.ttf') format('truetype');
+				font-weight: normal;
+				font-style: normal;
+			}
+			
+			body {
+				font-family: Arial, sans-serif;
+				margin: 0;
+			}
+			
+			p {
+				font-family: Kabel Bold;
+			}
+			
+			.sidepanel  {
+				width: 0;
+				position: fixed;
+				z-index: 1;
+				height: 250px;
+				top: 20px;
+				right: 0;
+				background-color: #f1d16c;
+				overflow-x: hidden;
+				transition: 0.5s;
+				padding-top: 60px;
+				border-radius: 15px 0 0 15px;
+			}
+
+			.sidepanel a {
+				font-family: Kabel Bold;
+				padding: 8px 8px 8px 32px;
+				text-decoration: none;
+				font-size: 25px;
+				color: #3c3441;
+				display: block;
+				transition: 0.3s;
+			}
+
+			.sidepanel a:hover {
+				color: #f1f1f1;
+			}
+
+			.sidepanel .closebtn {
+				position: absolute;
+				top: 0;
+				right: 25px;
+				font-size: 36px;
+			}
+
+			.openbtn {
+				position: absolute;
+				top: 25px;
+				right: 0;
+				font-size: 20px;
+				cursor: pointer;
+				background-color: #f1d16c;
+				color: #3c3441;
+				padding: 10px 15px;
+				border: none;
+				border-radius: 15px 0 0 15px;
+			}
+
+			.openbtn:hover {
+				background-color: #f2dc96;
+			}
+			
+			::-webkit-scrollbar {
+				width: 8px;
+			}
+
+			/* Track */
+			::-webkit-scrollbar-track {
+				border-radius: 10px;
+				padding: 5px;
+			}
+ 
+			/* Handle */
+			::-webkit-scrollbar-thumb {
+				background: #42383F;
+				border-radius: 15px;
+			}
+
+			/* Handle on hover */
+			::-webkit-scrollbar-thumb:hover {
+				background: #F3F0DF; 
+			}
+			
+			button {
+				margin: 5px;
+				padding-left: 15px;
+				padding-right: 15px;
+				padding-top: 5px;
+				padding-bottom: 5px;
+				background-color: #69cf16;
+				border-style: none;
+				border-bottom-style: solid;
+				border-width: 5px;
+				border-color: #369400;
+				border-radius: 50px;
+				cursor: pointer;
+				font-size: 24px;
+				color: white;
+			}
+			button:hover {
+				background-color: #83e92f;
+				border-color: #49c700;
+			}
+			
+			.container {
+				position: fixed;
+				height: 100%;
+				width: 100%;
+				display: flex;
+				justify-content: center;
+			}
+			.section {
+				width: 100%;
+				padding: 20px;
+				background-color: #F3F0DF;
+				text-align: center;
+				justify-content: center;
+			}
+			
+			.list-container {
+				background-color: #DCCC9B;
+				margin-top: 15px;
+				padding: 15px;
+				border-radius: 15px 15px 0 0;
+				height: 40%;
+				overflow: auto;
+				color: #42383F;
+			}
+			
+			.title-section {
+				display: flex;
+				justify-content: center;
+			}
+			
+			
+			.list {
+				list-style-type: none;
+				padding: 0;
+				text-align: center;
+			}
+			.list li {
+				margin-top: 15px;
+				font-size: 24px;
+				background-color: #f8f8f8;
+				border-left-style: solid;
+				border-width: 15px;
+				border-radius: 15px;
+				border-color: #8fa9bc;
+				outline-style: solid;
+				outline-color: white;
+				outline-width: 2px;
+				color: black;
+			}
+			.list li:first-child {
+				font-weight: bold;
+				font-size: 24px;
+				background-color: #f8f8f8;
+				border-left-style: solid;
+				border-width: 15px;
+				border-radius: 15px;
+				border-color: #5ab1f4;
+				outline-style: solid;
+				outline-color: white;
+				outline-width: 2px;
+				color: black;
+			}
+			.remove-button {
+				margin: 5px;
+				padding: 5px;
+				width: 45px;
+				height: 45px;
+				background-color: #feaf23;
+				border-style: none;
+				border-bottom-style: solid;
+				border-width: 5px;
+				border-color: #f06730;
+				border-radius: 50%;
+				cursor: pointer;
+				color: white;
+			}
+			
+			.clear-button {
+				margin: 5px;
+				padding: 5px;
+				width: 45px;
+				height: 45px;
+				background-color: #69cf16;
+				border-style: none;
+				border-bottom-style: solid;
+				border-width: 5px;
+				border-color: #369400;
+				border-radius: 50%;
+				cursor: pointer;
+				color: white;
+			}
+			
+			.remove-button:hover {
+				background-color: #fec158;
+				border-color: #f3885e;
+			}
+			
+			.clear-button:hover {
+				background-color: #83e92f;
+				border-color: #49c700;
+			}
+			
+			.button-container {
+				display: flex;
+				justify-content: right;
+			}
+			
+			.list li:first-child:hover {
+			}
+			
+			.list li:hover {
+			}
+			
+			.list li:hover .button-container {
+				display: flex;
+				justify-content: right;
+			}
+			
+			.edit-button {
+				margin: 5px;
+				padding-left: 15px;
+				padding-right: 15px;
+				padding-top: 5px;
+				padding-bottom: 5px;
+				background-color: #69cf16;
+				border-style: none;
+				border-bottom-style: solid;
+				border-width: 5px;
+				border-color: #369400;
+				border-radius: 50px;
+				cursor: pointer;
+				font-size: 14px;
+				color: white;
+			}
+			.delete-button {
+				margin: 5px;
+				padding-left: 15px;
+				padding-right: 15px;
+				padding-top: 5px;
+				padding-bottom: 5px;
+				padding: 10 5px;
+				background-color: #feaf23;
+				border-style: none;
+				border-bottom-style: solid;
+				border-width: 5px;
+				border-color: #f06730;
+				border-radius: 50px;
+				cursor: pointer;
+				font-size: 12px;
+				color: white;
+			}
+			
+			.edit-button:hover,
+			.delete-button:hover {
+			}
+			
+			.number-edit {
+				font-size: 18px;
+				-webkit-text-fill-color: black;
+			}
+			
+			.button-holder {
+				background-color: #bfb38c;
+				border-radius: 0 0 15px 15px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="section">
+				<div class="title-section">
+					<image src="images/logo.png" style="width:75%"></image>
+				</div><br>
+				<div class="selected-dice">
+					<input style="font-family: 'MoGO Dice', sans-serif;" type="text" id="num" min="1" max="6" maxlength="2" required>
+				</div>
+				<div class="list-container">
+					<div class="title-section">
+						<svg height="50" width="100" xmlns="http://www.w3.org/2000/svg">
+							<line x1="0" y1="40" x2="75" y2="40" style="stroke:#C3B17D;stroke-width:1" />
+						</svg>
+						<p>Next Roll</p>
+						<svg height="50" width="100" xmlns="http://www.w3.org/2000/svg">
+							<line x1="25" y1="40" x2="100" y2="40" style="stroke:#C3B17D;stroke-width:1" />
+						</svg>
+					</div>
+					<ul id="list" class="list"></ul>
+					<div id="grad1"></div>
+				</div>
+				<div class="button-holder" style="justify-content: center;">
+					<button class="remove-button" onclick="removeFirstItem()"><i class="fa-solid fa-dice"></i></button>
+					<button class="clear-button" onclick="clearList()"><i class="fa-regular fa-trash-can"></i></button>
+				</div>
+				<div class="input-container">
+					<button id="dice1"><i class="fa-solid fa-dice-one"></i></button>
+					<button id="dice2"><i class="fa-solid fa-dice-two"></i></button>
+					<button id="dice3"><i class="fa-solid fa-dice-three"></i></button><br>
+					<button id="dice4"><i class="fa-solid fa-dice-four"></i></button>
+					<button id="dice5"><i class="fa-solid fa-dice-five"></i></button>
+					<button id="dice6"><i class="fa-solid fa-dice-six"></i></button>
+				</div>
+			</div>
+		</div>
+		
+		<div id="mySidepanel" class="sidepanel">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="fa-solid fa-xmark"></i></a>
+			<a href="mobile.html">Home</a>
+			<a href="mobileboard.html">Board Tracker</a>
+			<a href="pegtrack.html">Peg-E Tracker</a>
+			<a href="partnertrack.html">Partner Tracker</a>
+			<a href="https://discord.com/invite/jPdmaFSAC2"><i class="fa-brands fa-discord"></i> Discord</a>
+		</div>
+		
+		<button class="openbtn" onclick="openNav()"><i class="fa-solid fa-bars"></i></button>
+		
+		<script>
+			function openNav() {
+				document.getElementById("mySidepanel").style.width = "250px";
+			}
+			
+			function closeNav() {
+				document.getElementById("mySidepanel").style.width = "0";
+			}
+			const num = document.getElementById('num');
+			const dice1 = document.getElementById('dice1');
+			const dice2 = document.getElementById('dice2');
+			const dice3 = document.getElementById('dice3');
+			const dice4 = document.getElementById('dice4');
+			const dice5 = document.getElementById('dice5');
+			const dice6 = document.getElementById('dice6');
+			
+			dice1.addEventListener('click', () => {
+				num.value = num.value + "1";
+				if (num.value.length === num.maxLength) {
+					addNumbers();
+				}
+			});
+			dice2.addEventListener('click', () => {
+				num.value = num.value + "2";
+				if (num.value.length === num.maxLength) {
+					addNumbers();
+				}
+			});
+			dice3.addEventListener('click', () => {
+				num.value = num.value + "3";
+				if (num.value.length === num.maxLength) {
+					addNumbers();
+				}
+			});
+			dice4.addEventListener('click', () => {
+				num.value = num.value + "4";
+				if (num.value.length === num.maxLength) {
+					addNumbers();
+				}
+			});
+			dice5.addEventListener('click', () => {
+				num.value = num.value + "5";
+				if (num.value.length === num.maxLength) {
+					addNumbers();
+				}
+			});
+			dice6.addEventListener('click', () => {
+				num.value = num.value + "6";
+				if (num.value.length === num.maxLength) {
+					addNumbers();
+				}
+			});
+
+			num.addEventListener('input', () => {
+				if (num.value.length === num.maxLength) {
+					addNumbers();
+				}
+			});
+			
+			function loadListFromCookie() {
+				var savedList = getCookie('savedList');
+				var numbersArray = savedList ? JSON.parse(decodeURIComponent(savedList)) : [];
+				var listContainer = document.querySelector('#list'); // Make sure this is the correct selector for your list container
+  
+				// Clear any existing list items
+				listContainer.innerHTML = '';
+
+				// Create new list items from the numbers array and append to the list
+				numbersArray.forEach(function(number) {
+					var li = document.createElement('li');
+					li.textContent = number;
+					listContainer.appendChild(li);
+				});
+			}
+			
+			// Helper function to get a cookie by name
+			function getCookie(name) {
+				var value = "; " + document.cookie;
+				var parts = value.split("; " + name + "=");
+				if (parts.length === 2) return parts.pop().split(";").shift();
+				return null;
+			}
+
+			// Call the load function when the document is ready
+			document.addEventListener('DOMContentLoaded', loadListFromCookie);
+			
+
+			function addNumbers() {
+				let numVal = document.getElementById('num').value;
+				let numString = String(numVal);
+				let firstDigit = parseInt(numString[0], 10);
+				let secondDigit = parseInt(numString[1], 10);
+				if (firstDigit >= 1 && firstDigit <= 6 && secondDigit >= 1 && secondDigit <= 6) {
+					const sum = firstDigit + secondDigit;
+					const list = document.getElementById('list');
+					const listItem = document.createElement('li');
+					const editButton = document.createElement('button');
+					const deleteButton = document.createElement('button');
+					const buttonContainer = document.createElement('div');
+					buttonContainer.className = 'button-container';
+					editButton.className = 'edit-button';
+					editButton.innerHTML = 'EDIT';
+					editButton.onclick = function(event) {
+						editItem(event.target);
+					};
+					deleteButton.className = 'delete-button';
+					deleteButton.innerHTML = 'DELETE';
+					deleteButton.onclick = function(event) {
+						deleteItem(event.target);
+					};
+					buttonContainer.appendChild(deleteButton);
+					buttonContainer.appendChild(editButton);
+					listItem.textContent = sum;
+					listItem.appendChild(buttonContainer);
+					list.appendChild(listItem);
+					let placeholderValue = num.value;
+					num.value = '';
+					num.placeholder = placeholderValue;
+					saveList();
+				} else {
+					alert('Both numbers must be within the range of 1 to 6.');
+				}
+			}
+
+			function removeFirstItem() {
+				const list = document.getElementById('list');
+				if (list.firstChild) {
+					list.removeChild(list.firstChild);
+				}
+			}
+			
+			function clearList() {
+				const list = document.getElementById('list');
+				while (list.firstChild) {
+					list.removeChild(list.firstChild);
+				}
+			}
+			
+			function deleteItem(button) {
+				const listItem = button.closest('li');
+				listItem.remove();
+			};
+
+			function editItem(button) {
+				const listItem = button.closest('li');
+				const input = document.createElement('input');
+				input.className = 'number-edit';
+				input.type = 'number';
+				input.min = '1';
+				input.max = '12';
+				input.maxLength = '2';
+				input.required = true;
+				input.value = listItem.textContent;
+				listItem.textContent = '';
+				listItem.appendChild(input);
+				input.focus();
+				input.addEventListener('blur', () => {
+					if (input.value >= 1 && input.value <= 12) {
+						const editButton = document.createElement('button');
+						const deleteButton = document.createElement('button');
+						const buttonContainer = document.createElement('div');
+						listItem.textContent = input.value;	
+						buttonContainer.className = 'button-container';
+						editButton.className = 'edit-button';
+						editButton.innerHTML = 'EDIT';
+						editButton.onclick = function(event) {
+							editItem(event.target);
+						};
+						deleteButton.className = 'delete-button';
+						deleteButton.innerHTML = 'DELETE';
+						deleteButton.onclick = function(event) {
+							deleteItem(event.target);
+						};
+						buttonContainer.appendChild(deleteButton);
+						buttonContainer.appendChild(editButton);
+						listItem.appendChild(buttonContainer);
+						input.remove();
+					} else {
+						alert('New number must be between 1 and 12');
+					}
+				});
+			};
+			
+			function saveList() {
+				var listItems = document.querySelectorAll('#list li');
+				var numbersArray = [];
+				
+				listItems.forEach(function(li) {
+					// Extract the number from the list children
+					var number = li.childNodes[0].nodeValue.trim();
+					numbersArray.push(number);
+				});
+
+				// Convert the array to a JSON string and store it in a cookie
+				document.cookie = 'savedList=' + encodeURIComponent(JSON.stringify(numbersArray)) + ';path=/';
+			}
+		</script>
+	</body>
+	</html>

@@ -1,0 +1,813 @@
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<script src="https://kit.fontawesome.com/2da270ed34.js" crossorigin="anonymous"></script>
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3875112519675768" crossorigin="anonymous"></script>
+		<title>APM Calculator</title>
+		<style>
+			
+			@font-face {
+				font-family: 'Kabel Bold';
+				src: url('fonts/Kabel-Bold-Normal.ttf') format('truetype');
+				font-weight: normal;
+				font-style: normal;
+			}
+			
+			body {
+				font-family: Arial, sans-serif;
+				margin: 0;
+			}
+			
+			p {
+				font-family: Kabel Bold;
+			}
+			
+			.sidepanel  {
+				width: 0;
+				position: fixed;
+				z-index: 1;
+				height: 250px;
+				top: 20px;
+				right: 0;
+				background-color: #f1d16c;
+				overflow-x: hidden;
+				transition: 0.5s;
+				padding-top: 60px;
+				border-radius: 15px 0 0 15px;
+			}
+
+			.sidepanel a {
+				font-family: Kabel Bold;
+				padding: 8px 8px 8px 32px;
+				text-decoration: none;
+				font-size: 25px;
+				color: #3c3441;
+				display: block;
+				transition: 0.3s;
+			}
+
+			.sidepanel a:hover {
+				color: #f1f1f1;
+			}
+
+			.sidepanel .closebtn {
+				position: absolute;
+				top: 0;
+				right: 25px;
+				font-size: 36px;
+			}
+
+			.openbtn {
+				position: absolute;
+				top: 25px;
+				right: 0;
+				font-size: 20px;
+				cursor: pointer;
+				background-color: #f1d16c;
+				color: #3c3441;
+				padding: 10px 15px;
+				border: none;
+				border-radius: 15px 0 0 15px;
+			}
+
+			.openbtn:hover {
+				background-color: #f2dc96;
+			}
+			
+			::-webkit-scrollbar {
+				width: 8px;
+			}
+
+			/* Track */
+			::-webkit-scrollbar-track {
+				border-radius: 10px;
+				padding: 5px;
+			}
+ 
+			/* Handle */
+			::-webkit-scrollbar-thumb {
+				background: #42383F;
+				border-radius: 15px;
+			}
+
+			/* Handle on hover */
+			::-webkit-scrollbar-thumb:hover {
+				background: #F3F0DF; 
+			}
+			
+			button {
+				margin: 5px;
+				padding-left: 15px;
+				padding-right: 15px;
+				padding-top: 5px;
+				padding-bottom: 5px;
+				background-color: #69cf16;
+				border-style: none;
+				border-bottom-style: solid;
+				border-width: 5px;
+				border-color: #369400;
+				border-radius: 50px;
+				cursor: pointer;
+				font-size: 24px;
+				color: white;
+			}
+			button:hover {
+				background-color: #83e92f;
+				border-color: #49c700;
+			}
+			
+			.container {
+				position: fixed;
+				height: 100%;
+				width: 100%;
+				display: flex;
+				justify-content: center;
+			}
+			.section {
+				width: 100%;
+				padding: 20px;
+				background-color: #F3F0DF;
+				text-align: center;
+				justify-content: center;
+			}
+			
+			.grad1 {
+				height: 100%;
+				background-image: linear-gradient(to right, rgba(220,204,155,0), rgba(220,204,155,1));
+				position: absolute;
+				top: 0;
+				right: 0;
+				width: 33%;
+			}
+			
+			.list-container {
+				position: relative;
+				background-color: #DCCC9B;
+				margin: 15px;
+				padding: 5px;
+				padding-bottom: 15px;
+				border-radius: 15px;
+				height: auto;
+				overflow: hidden;
+				color: #42383F;
+			}
+			
+			.title-section {
+				display: flex;
+				justify-content: center;
+			}
+			
+			
+			.list {
+				display: flex;
+				list-style-type: none;
+				padding: 0;
+				padding-left: 5px;
+				margin: 0;
+				text-align: center;
+			}
+			.list li {
+				padding-left: 5px;
+				padding-right: 15px;
+				float: left;
+				margin-right: 15px;
+				font-size: 24px;
+				background-color: #f8f8f8;
+				border-left-style: solid;
+				border-width: 15px;
+				border-radius: 15px;
+				border-color: #8fa9bc;
+				outline-style: solid;
+				outline-color: white;
+				outline-width: 2px;
+				color: black;
+			}
+			.list li:first-child {
+				font-weight: bold;
+				font-size: 24px;
+				background-color: #f8f8f8;
+				border-left-style: solid;
+				border-width: 15px;
+				border-radius: 15px;
+				border-color: #5ab1f4;
+				outline-style: solid;
+				outline-color: white;
+				outline-width: 2px;
+				color: black;
+			}
+			.remove-button {
+				background-color: #feaf23;
+				border-color: #f06730;
+				font-size: 18px;
+			}
+			
+			.clear-button {
+				background-color: #69cf16;
+				border-color: #369400;
+				font-size: 18px;
+			}
+			
+			.remove-button:hover {
+				background-color: #fec158;
+				border-color: #f3885e;
+			}
+			
+			.clear-button:hover {
+				background-color: #83e92f;
+				border-color: #49c700;
+			}
+			
+			.button-container {
+				display: flex;
+				justify-content: right;
+			}
+			
+			.list li:first-child:hover {
+			}
+			
+			.list li:hover {
+			}
+			
+			.list li:hover .button-container {
+				display: flex;
+				justify-content: right;
+			}
+			
+			.edit-button {
+				margin: 5px;
+				padding-left: 15px;
+				padding-right: 15px;
+				padding-top: 5px;
+				padding-bottom: 5px;
+				background-color: #69cf16;
+				border-style: none;
+				border-bottom-style: solid;
+				border-width: 5px;
+				border-color: #369400;
+				border-radius: 50px;
+				cursor: pointer;
+				font-size: 14px;
+				color: white;
+			}
+			.delete-button {
+				margin: 5px;
+				padding-left: 15px;
+				padding-right: 15px;
+				padding-top: 5px;
+				padding-bottom: 5px;
+				padding: 10 5px;
+				background-color: #feaf23;
+				border-style: none;
+				border-bottom-style: solid;
+				border-width: 5px;
+				border-color: #f06730;
+				border-radius: 50px;
+				cursor: pointer;
+				font-size: 12px;
+				color: white;
+			}
+			
+			.edit-button:hover,
+			.delete-button:hover {
+			}
+			
+			.number-edit {
+				font-size: 18px;
+				-webkit-text-fill-color: black;
+			}
+			
+			.button-holder {
+				background-color: #bfb38c;
+				border-radius: 0 0 15px 15px;
+			}
+			
+			.board-section {
+				padding: 15px;
+			}
+			
+			#game-board {
+				justify-content: center;
+				display: grid;
+				grid-template-columns: repeat(11, 1fr);
+				grid-template-rows: repeat(11, 1fr);
+				gap: 2px;
+				background-color: #fff;
+				padding: 5%;
+				width: 100%;
+				height: auto;
+				box-sizing: border-box;
+			}
+
+			#game-board .selectable-space {
+				background-color: #fff;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 14px;
+				outline-style: solid;
+				outline-color: black;
+			}
+			
+			#game-board .selected {
+				background-color: #69cf16;
+			}
+			
+			#game-board .next-space {
+				background-color: #5ab1f4;
+			}
+			
+			#game-board .following-space {
+				background-color: #8fa9bc;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="section">
+				<div class="title-section">
+					<image src="images/logo.png" style="width:75%"></image>
+				</div>
+				<div>
+					<div class="list-container">
+						<div class="title-section">
+							<p>Next Roll</p>
+							<svg height="50" width="100" xmlns="http://www.w3.org/2000/svg">
+								<line x1="25" y1="25" x2="100" y2="25" style="stroke:#C3B17D;stroke-width:1" />
+							</svg>
+						</div>
+						<ul id="list" class="list"><li>2</li><li>4</li><li>2</li><li>4</li><li>2</li><li>4</li><li>2</li><li>4</li></ul>
+						<div class="grad1"></div>
+					</div>
+					<div style="justify-content: center;">
+						<button class="remove-button" onclick="removeFirstItem()">NEXT ROLL</button>
+						<button class="clear-button" onclick="clearList()">CLEAR ALL</button>
+						</div>
+					</div>
+					<div class="board-section">
+						<div id="game-board">
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div>Next</div>
+							<div></div>
+							<div>Roll</div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="mySidepanel" class="sidepanel">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="fa-solid fa-xmark"></i></a>
+			<a href="mobile.html">Home</a>
+			<a href="mobileboard.html">Board Tracker</a>
+			<a href="pegtrack.html">Peg-E Tracker</a>
+			<a href="partnertrack.html">Partner Tracker</a>
+			<a href="https://discord.com/invite/jPdmaFSAC2"><i class="fa-brands fa-discord"></i> Discord</a>
+		</div>
+		
+		<button class="openbtn" onclick="openNav()"><i class="fa-solid fa-bars"></i></button>
+		
+		<script>
+			function openNav() {
+				document.getElementById("mySidepanel").style.width = "250px";
+			}
+			
+			function closeNav() {
+				document.getElementById("mySidepanel").style.width = "0";
+			}
+			
+			function loadListFromCookie() {
+				var savedList = getCookie('savedList');
+				var numbersArray = savedList ? JSON.parse(decodeURIComponent(savedList)) : [];
+				var listContainer = document.querySelector('#list'); // Make sure this is the correct selector for your list container
+  
+				// Clear any existing list items
+				listContainer.innerHTML = '';
+
+				// Create new list items from the numbers array and append to the list
+				numbersArray.forEach(function(number) {
+					var li = document.createElement('li');
+					li.textContent = number;
+					listContainer.appendChild(li);
+				});
+			}
+
+			// Helper function to get a cookie by name
+			function getCookie(name) {
+				var value = "; " + document.cookie;
+				var parts = value.split("; " + name + "=");
+				if (parts.length === 2) return parts.pop().split(";").shift();
+				return null;
+			}
+
+			// Call the load function when the document is ready
+			document.addEventListener('DOMContentLoaded', loadListFromCookie);
+			
+			//const num = document.getElementById('num');
+			//const dice1 = document.getElementById('dice1');
+			//const dice2 = document.getElementById('dice2');
+			//const dice3 = document.getElementById('dice3');
+			//const dice4 = document.getElementById('dice4');
+			//const dice5 = document.getElementById('dice5');
+			//const dice6 = document.getElementById('dice6');
+			
+			//dice1.addEventListener('click', () => {
+			//	num.value = num.value + "1";
+			//	if (num.value.length === num.maxLength) {
+			//		addNumbers();
+			//	}
+			//});
+			//dice2.addEventListener('click', () => {
+			//	num.value = num.value + "2";
+			//	if (num.value.length === num.maxLength) {
+			//		addNumbers();
+			//	}
+			//});
+			//dice3.addEventListener('click', () => {
+			//	num.value = num.value + "3";
+			//	if (num.value.length === num.maxLength) {
+			//		addNumbers();
+			//	}
+			//});
+			//dice4.addEventListener('click', () => {
+			//	num.value = num.value + "4";
+			//	if (num.value.length === num.maxLength) {
+			//		addNumbers();
+			//	}
+			//});
+			//dice5.addEventListener('click', () => {
+			//	num.value = num.value + "5";
+			//	if (num.value.length === num.maxLength) {
+			//		addNumbers();
+			//	}
+			//});
+			//dice6.addEventListener('click', () => {
+			//	num.value = num.value + "6";
+			//	if (num.value.length === num.maxLength) {
+			//		addNumbers();
+			//	}
+			//});
+
+			//num.addEventListener('input', () => {
+			//	if (num.value.length === num.maxLength) {
+			//		addNumbers();
+			//	}
+			//});
+
+			function addNumbers() {
+				let numVal = document.getElementById('num').value;
+				let numString = String(numVal);
+				let firstDigit = parseInt(numString[0], 10);
+				let secondDigit = parseInt(numString[1], 10);
+				if (firstDigit >= 1 && firstDigit <= 6 && secondDigit >= 1 && secondDigit <= 6) {
+					const sum = firstDigit + secondDigit;
+					const list = document.getElementById('list');
+					const listItem = document.createElement('li');
+					const editButton = document.createElement('button');
+					const deleteButton = document.createElement('button');
+					const buttonContainer = document.createElement('div');
+					buttonContainer.className = 'button-container';
+					editButton.className = 'edit-button';
+					editButton.innerHTML = 'EDIT';
+					editButton.onclick = function(event) {
+						editItem(event.target);
+					};
+					deleteButton.className = 'delete-button';
+					deleteButton.innerHTML = 'DELETE';
+					deleteButton.onclick = function(event) {
+						deleteItem(event.target);
+					};
+					buttonContainer.appendChild(deleteButton);
+					buttonContainer.appendChild(editButton);
+					listItem.textContent = sum;
+					listItem.appendChild(buttonContainer);
+					list.appendChild(listItem);
+					num.value = '';
+					updateBoard();
+					saveList();
+				} else {
+					alert('Both numbers must be within the range of 1 to 6.');
+				}
+			}
+
+			function removeFirstItem() {
+				const list = document.getElementById('list');
+				if (list.firstChild) {
+					list.removeChild(list.firstChild);
+					updateBoard();
+					saveList();
+				}
+			}
+			
+			function clearList() {
+				const list = document.getElementById('list');
+				while (list.firstChild) {
+					list.removeChild(list.firstChild);
+				}
+				updateBoard();
+				saveList();
+			}
+			
+			function deleteItem(button) {
+				const listItem = button.closest('li');
+				listItem.remove();
+				saveList();
+			};
+
+			function editItem(button) {
+				const listItem = button.closest('li');
+				const input = document.createElement('input');
+				input.className = 'number-edit';
+				input.type = 'number';
+				input.min = '1';
+				input.max = '12';
+				input.maxLength = '2';
+				input.required = true;
+				input.value = listItem.textContent;
+				listItem.textContent = '';
+				listItem.appendChild(input);
+				input.focus();
+				input.addEventListener('blur', () => {
+					if (input.value >= 1 && input.value <= 12) {
+						const editButton = document.createElement('button');
+						const deleteButton = document.createElement('button');
+						const buttonContainer = document.createElement('div');
+						listItem.textContent = input.value;	
+						buttonContainer.className = 'button-container';
+						editButton.className = 'edit-button';
+						editButton.innerHTML = 'EDIT';
+						editButton.onclick = function(event) {
+							editItem(event.target);
+						};
+						deleteButton.className = 'delete-button';
+						deleteButton.innerHTML = 'DELETE';
+						deleteButton.onclick = function(event) {
+							deleteItem(event.target);
+						};
+						buttonContainer.appendChild(deleteButton);
+						buttonContainer.appendChild(editButton);
+						listItem.appendChild(buttonContainer);
+						input.remove();
+						saveList();
+					} else {
+						alert('New number must be between 1 and 12');
+					}
+				});
+			};
+			
+			// Game board functionality
+			const gameBoard = document.getElementById('game-board');
+			const cells = Array.from(gameBoard.children);
+			const spaces = [gameBoard.children[121], gameBoard.children[120], gameBoard.children[119], gameBoard.children[118], gameBoard.children[117], gameBoard.children[116], gameBoard.children[115], gameBoard.children[114], gameBoard.children[113], gameBoard.children[112], gameBoard.children[111], gameBoard.children[110], gameBoard.children[99], gameBoard.children[88], gameBoard.children[77], gameBoard.children[66], gameBoard.children[55], gameBoard.children[44], gameBoard.children[33], gameBoard.children[22], gameBoard.children[11], gameBoard.children[0], gameBoard.children[1], gameBoard.children[2], gameBoard.children[3], gameBoard.children[4], gameBoard.children[5], gameBoard.children[6], gameBoard.children[7], gameBoard.children[8], gameBoard.children[9], gameBoard.children[10], gameBoard.children[21], gameBoard.children[32], gameBoard.children[43], gameBoard.children[54], gameBoard.children[65], gameBoard.children[76], gameBoard.children[87], gameBoard.children[98], gameBoard.children[109]];
+			const locations = ['<i class="fa-solid fa-left-long"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-box-open"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-percent"></i>', '<i class="fa-solid fa-train"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-question"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-eye"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-lightbulb"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-train"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-box-open"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-car"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-question"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-train"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-droplet"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-handcuffs"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-box-open"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-train"></i>', '<i class="fa-solid fa-question"></i>', '<i class="fa-solid fa-house"></i>', '<i class="fa-solid fa-percent"></i>', '<i class="fa-solid fa-house"></i>'];
+			let space = 1;
+			let tokenSpace = 0;
+			
+			spaces.forEach((cell, indexSpace) => {
+				if (cell) {
+					cell.innerHTML = locations[indexSpace-1];
+					cell.classList.add('selectable-space')
+					cell.addEventListener('click', () => {
+						if (!cell.classList.contains('selected')) {
+							cells.forEach(cell => cell.classList.remove('selected'));
+							cells.forEach(cell => cell.classList.remove('next-space'));
+							cells.forEach(cell => cell.classList.remove('following-space'));
+							cell.classList.add('selected');
+							cell.id = 'selected';
+							tokenSpace = indexSpace;
+		
+							// Display the 'next space' in the center of the board
+							const centerCell = gameBoard.children[60]; // 5th row, 5th column
+							const list = document.getElementById('list');
+							if (list.firstChild) {
+								const firstChildValue = parseInt(document.getElementById('list').firstChild.textContent);
+								const selectedSpace = parseInt(indexSpace);
+								const nextSpaceIndex = (selectedSpace + firstChildValue) % 100;
+								const adjustedSpaceIndex = ((selectedSpace-40) + firstChildValue) % 100;
+								if (nextSpaceIndex <= 40){
+									const nextSpace = spaces[nextSpaceIndex];
+									const locationIndex = (nextSpaceIndex-1);
+									nextSpace.classList.add('next-space');
+									centerCell.innerHTML = locations[locationIndex];
+								} else {
+									const nextSpace = spaces[adjustedSpaceIndex];
+									const locationIndex = (adjustedSpaceIndex-1);
+									nextSpace.classList.add('next-space');
+									centerCell.innerHTML = locations[locationIndex];
+								}
+								if (list.firstElementChild.nextElementSibling) {
+									const secondChildValue = parseInt(document.getElementById('list').firstElementChild.nextElementSibling.textContent);
+									const proceedingSpaceIndex = (nextSpaceIndex + secondChildValue) % 100;
+									const adjustedProceedingSpaceIndex = ((nextSpaceIndex-40) + secondChildValue) % 100;
+									if (proceedingSpaceIndex <= 40){
+										const proceedingSpace = spaces[proceedingSpaceIndex];
+										proceedingSpace.classList.add('following-space');
+									} else {
+										const proceedingSpace = spaces[adjustedProceedingSpaceIndex];
+										proceedingSpace.classList.add('following-space');
+									}
+								}
+							}
+						}
+					});
+					space = space + 1;
+				}
+			});
+			
+			function updateBoard() {
+				cells.forEach(cell => cell.classList.remove('next-space'));
+				cells.forEach(cell => cell.classList.remove('following-space'));
+				const cell = document.getElementById('selected');
+				const centerCell = gameBoard.children[60];
+				// Get the value of the first child in the list
+				// Calculate the next space
+				// const nextSpaceIndex = (selectedSpace + firstChildValue) % 100;
+				// const adjustedSpaceIndex = ((selectedSpace-40) + firstChildValue) % 100;
+				// const proceedingSpaceIndex = (nextSpaceIndex + secondChildValue) % 100;
+				// const adjustedProceedingSpaceIndex = ((nextSpaceIndex-40) + secondChildValue) % 100;
+							
+					
+				// if (nextSpaceIndex <= 40){
+				// 	const nextSpace = spaces[nextSpaceIndex];
+				// 	const proceedingSpace = spaces[proceedingSpaceIndex];
+				// 	const locationIndex = (nextSpaceIndex-1);
+				// 	nextSpace.classList.add('next-space');
+				// 	proceedingSpace.classList.add('following-space');
+				// 	centerCell.innerHTML = locations[locationIndex];
+				// } else {
+				// const nextSpace = spaces[adjustedSpaceIndex];
+				// 	const proceedingSpace = spaces[proceedingSpaceIndex];
+				// 	const locationIndex = (adjustedSpaceIndex-1);
+				// 	nextSpace.classList.add('next-space');
+				// 	proceedingSpace.classList.add('following-space');
+				// 	centerCell.innerHTML = locations[locationIndex];
+				// }
+				
+				const list = document.getElementById('list');
+					if (list.firstChild) {
+						const firstChildValue = parseInt(document.getElementById('list').firstChild.textContent);
+						const selectedSpace = parseInt(tokenSpace);
+						const nextSpaceIndex = (selectedSpace + firstChildValue) % 100;
+						const adjustedSpaceIndex = ((selectedSpace-40) + firstChildValue) % 100;
+						if (nextSpaceIndex <= 40){
+							const nextSpace = spaces[nextSpaceIndex];
+							const locationIndex = (nextSpaceIndex-1);
+							nextSpace.classList.add('next-space');
+							centerCell.innerHTML = locations[locationIndex];
+						} else {
+							const nextSpace = spaces[adjustedSpaceIndex];
+							const proceedingSpace = spaces[proceedingSpaceIndex];
+							const locationIndex = (adjustedSpaceIndex-1);
+							nextSpace.classList.add('next-space');
+							proceedingSpace.classList.add('following-space');
+							centerCell.innerHTML = locations[locationIndex];
+						}
+						if (list.firstElementChild.nextElementSibling) {
+							const secondChildValue = parseInt(document.getElementById('list').firstElementChild.nextElementSibling.textContent);
+							const proceedingSpaceIndex = (nextSpaceIndex + secondChildValue) % 100;
+							const adjustedProceedingSpaceIndex = ((nextSpaceIndex-40) + secondChildValue) % 100;
+							if (proceedingSpaceIndex <= 40){
+								const proceedingSpace = spaces[proceedingSpaceIndex];
+								proceedingSpace.classList.add('following-space');
+							} else {
+								const proceedingSpace = spaces[adjustedSpaceIndex-1];
+								proceedingSpace.classList.add('following-space');
+							}
+						}
+					}
+			}
+			
+			function saveList() {
+				var listItems = document.querySelectorAll('#list li');
+				var numbersArray = [];
+				
+				listItems.forEach(function(li) {
+					// Extract the number from the list children
+					var number = li.childNodes[0].nodeValue.trim();
+					numbersArray.push(number);
+				});
+
+				// Convert the array to a JSON string and store it in a cookie
+				document.cookie = 'savedList=' + encodeURIComponent(JSON.stringify(numbersArray)) + ';path=/';
+			}
+		</script>
+	</body>
+	</html>
